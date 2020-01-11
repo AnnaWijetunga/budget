@@ -1,3 +1,4 @@
-class Expense < ActiveRecord::Base
-  belongs_to :user
+class User < ActiveRecord::Base
+  has_secure_password
+  has_many :expenses
 end
