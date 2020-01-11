@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-    <title>Budget</title>
+    <title>Expense Tracker</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -18,9 +18,17 @@
 
         <%= yield %>
 
-      <footer class="branding">
-        <small>&copy; 2020 <strong>Budget</strong></small>
+        <footer>
+        <small>&copy; 2020 <strong>Expense Tracker</strong></small> /
+        <% if logged_in? %>
+          <small><strong><a href="/logout">Log Out</a></strong></small>
+        <% else %>
+          <small><strong><a href="/login">Log In</a></strong></small> /
+          <small><strong><a href="/login">Sign Up</a></strong></small>
+        <% end %>
       </footer>
+
+      
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
