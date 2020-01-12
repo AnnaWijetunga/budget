@@ -1,0 +1,33 @@
+<h1>Create New Expense</h1>
+
+<% if @errors %>
+  <% @errors.each do |error| %>
+    <p style="color: red;"><%= error %></p>
+  <% end %>
+<% end %>
+
+<br>
+
+<form action="/expenses" method="POST">
+  <label for="vendor">Vendor: </label>
+  <input type="text" name="vendor" id="vendor"/>
+
+  <br></br>
+
+  <label for="date">Date: </label>
+  <input type="date" name="date" id="date"/>
+
+  <br></br>
+
+  <label for="total">Total:  $</label>
+  <input type="number" name="total" id="total" min="0.01" step="0.01" max="9999.99"/>
+
+  <br></br>
+
+  <label for="description">Description: </label>
+  <input type="text" name="description" id="description"/>
+
+  <br></br>
+
+  <input type="submit" value="Create Expense"/>
+</form>
