@@ -1,4 +1,6 @@
 <h1>Create New Expense</h1>
+<br>
+<br>
 
 <% if @errors %>
   <% @errors.each do |error| %>
@@ -6,9 +8,7 @@
   <% end %>
 <% end %>
 
-<br>
-
-<form action="/expenses" method="POST">
+<h5><form action="/expenses" method="POST">
   <label for="vendor">Vendor: </label>
   <input type="text" name="vendor" id="vendor"/>
 
@@ -30,4 +30,4 @@
   <br></br>
 
   <input type="submit" value="Create Expense"/>
-</form>
+</form></h5>
