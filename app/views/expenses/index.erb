@@ -6,17 +6,17 @@
 <br>
 <br>
 
-<h3>Hi, <%= current_user.username.capitalize %>! You've spent $<%= current_user.total_amount %> this month.</h3>
+<h3>Hi, <%= current_user.username.capitalize %>!</h3>
 <br>
 
-<h5><ul>
+<h4><ul>
   <% if @expenses.size > 0 %>
     <table class="table table-hover table-striped" >
     <tr class="info">
-      <th><h3>Description</h3></th>
-      <th><h3>Amount</h3></th>
-      <th><h3>Date</h3></th>
-      <th><h3></h3></th>
+      <th><h4>Description</h4></th>
+      <th><h4>Amount</h4></th>
+      <th><h4>Date</h4></th>
+      <th><h4></h4></th>
     </tr>
       <% current_user.expenses.each do |expense| %>
         <tr style="text-align:left;">
@@ -28,13 +28,10 @@
       <% end %>
     </table>
     <br>
-    <br>
-    <br>
-    <br>
     <a href="/expenses/new">Create new expense</a>
     <br>
     <br>
   <% else %>
     Yes, so exciting! Click <a href="/expenses/new">here</a> to add your first expense.
   <% end %>
-</ul></h5>
+</ul></h4>
