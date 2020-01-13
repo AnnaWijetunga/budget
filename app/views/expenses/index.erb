@@ -6,21 +6,35 @@
 <br>
 <br>
 
-<h3>Welcome, <b><%= @current_user.username.capitalize%></b>!</h3>
+<h3>Hi, <%= current_user.username.capitalize %>! You've spent $<%= current_user.total_amount %> this month.</h3>
 <br>
+
 <h5><ul>
   <% if @expenses.size > 0 %>
-    <% @expenses.each do |expense| %>
-      <% if expense.user_id == @current_user.id %>
-        <li><a href="/expenses/<%= expense.id %>"><b><%= expense.vendor %></b></a> from <%= expense.date %> for $<%= "%.2f" % expense.total %></li>
-        <br></br>
+    <table class="table table-hover table-striped" >
+    <tr class="info">
+      <th><h3>Description</h3></th>
+      <th><h3>Amount</h3></th>
+      <th><h3>Date</h3></th>
+      <th><h3></h3></th>
+    </tr>
+      <% current_user.expenses.each do |expense| %>
+        <tr style="text-align:left;">
+          <td><a href="expenses/<%= expense.id %>"><%= expense.description %></a></td>
+          <td>$ <%= expense.total %></td>
+          <td><%= expense.date %></td>
+          <td><a href="expenses/<%= expense.id %>/edit">Edit</a></td>
+        </tr>
       <% end %>
-    <% end %>
+    </table>
+    <br>
+    <br>
+    <br>
     <br>
     <a href="/expenses/new">Create new expense</a>
     <br>
     <br>
   <% else %>
-    <p>You do not have expenses yet! <a href="/expenses/new">Create a new one here</a>.</p>
+    Yes, so exciting! Click <a href="/expenses/new">here</a> to add your first expense.
   <% end %>
 </ul></h5>
