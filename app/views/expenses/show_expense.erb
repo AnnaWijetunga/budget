@@ -12,17 +12,11 @@
 
 <br>
 
-<a href="/expenses/<%= @expense.id %>/edit">Edit Expense</a>
+<p><a href="/expenses/<%= @expense.id %>/edit">Edit Expense</a></p>
 
-<br></br>
-
-<form action="/expenses/<%= @expense.id %>/delete" method="POST">
+<h5><form action="/expenses/<%= @expense.id %>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="DELETE"/>
   <input type="submit" value="Delete Expense">
-</form>
-
-<br></br>
-
-<a href="/expenses">View All Expenses</a>
+</form></h5>
 <br>
-<br>
+<p><a href="/expenses">View All Expenses</a></p>
