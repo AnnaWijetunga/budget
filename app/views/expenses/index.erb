@@ -1,12 +1,14 @@
-<p>Welcome <b><%= @current_user.username%></b>!</p>
-
 <% if @errors %>
   <p style="color: red;"><%= @errors %></p>
 <% end %>
 
 <h1>My Expenses</h1>
 <br>
-<ul>
+<br>
+
+<h3>Welcome, <b><%= @current_user.username.capitalize%></b>!</h3>
+<br>
+<h5><ul>
   <% if @expenses.size > 0 %>
     <% @expenses.each do |expense| %>
       <% if expense.user_id == @current_user.id %>
@@ -14,10 +16,11 @@
         <br></br>
       <% end %>
     <% end %>
+    <br>
     <a href="/expenses/new">Create new expense</a>
     <br>
     <br>
   <% else %>
-    <p>You don't have expenses yet! <a href="/expenses/new">Create a new one here</a>.</p>
+    <p>You do not have expenses yet! <a href="/expenses/new">Create a new one here</a>.</p>
   <% end %>
-</ul>
+</ul></h5>
