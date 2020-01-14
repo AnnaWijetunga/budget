@@ -17,18 +17,18 @@
   </head>
 
   <body>
-    <nav>
-      <div class="container">
-        <ul>
+    <nav class="navigation-bar">
+      <img class="logo" src="penny.png">
+      <ul>
           <li><a href="/">Home</a></li>
           <% if logged_in? %>
             <li><a href="/expenses">Expenses</a></li>
             <li><a href="/expenses/new">Add Expense</a></li>
+            <li><a href="/logout">Logout</a></li>
           <% else %>
             <li><a href="/login">Login</a></li>
           <% end %>
-        </ul>
-      </div>
+      </ul>
     </nav>
   
     <main>
@@ -36,7 +36,7 @@
     </main>
 
       <footer class="branding">
-        <small>&copy; 2020 <strong>Expense Tracker</strong></small> 
+        <small>&copy; 2020 <strong>Penny Patrol</strong></small> 
         <% if logged_in? %>
           <small><strong><a href="/logout">Log Out</a></strong></small>
         <% else %>
