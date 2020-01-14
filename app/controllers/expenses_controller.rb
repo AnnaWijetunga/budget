@@ -31,6 +31,7 @@ class ExpensesController < ApplicationController
       end
     end
   
+    # shows one expense
     get '/expenses/:id' do
       @expense = Expense.find(params[:id])
       if logged_in? && @expense.user == current_user
@@ -40,6 +41,8 @@ class ExpensesController < ApplicationController
       end
     end
   
+    # if logged in, user sees edit form
+    # user can only edit expenses they created
     get '/expenses/:id/edit' do
       @expense = Expense.find(params[:id])
       if logged_in? && @expense.user == current_user
@@ -51,17 +54,17 @@ class ExpensesController < ApplicationController
       end
     end
   
+    # user must edit without leaving any blank content
     patch '/expenses/:id' do
-      @expense = Expense.find(params[:id])
-      @expense.vendor = params[:vendor]
-      @expense.description = params[:description]
-      @expense.date = params[:date]
-      @expense.total = params[:total]
-      if !@expense.save
-        @errors = @expense.errors.full_messages
-        erb :'/expenses/update_expense'
+      if !params[:vendor].empty? && !params[:date].empty? && !params[:total].empty? && !params[:description].empty?
+        @expense = Expense.find(params[:id])
+        @expense.update(vendor:params[:vendor], date:params[:date], total:params[:total], description:params[:description])
+        @expense.save
+        flash[:message] = "Your expense has been updated!"
+        redirect to "/expenses"
       else
-        redirect to("/expenses/#{@expense.id}")
+        flash[:message] = "Please fill all boxes, thank you!"
+        redirect to "/expenses/#{params[:id]}/edit"
       end
     end
   
