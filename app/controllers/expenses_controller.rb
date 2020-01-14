@@ -20,9 +20,9 @@ class ExpensesController < ApplicationController
     post '/expenses' do
       if logged_in?
         @expense = current_user.expenses.build(params)
-        if !@expense.save
-          @errors = @expense.errors.full_messages
-          erb :'/expenses/create_expense'
+        if params[:vendor].empty? ||params[:date].empty? || params[:total].empty? || params[:description].empty?
+          flash[:message] = "Please fill all boxes, thank you!"
+          redirect to "/expenses/new"
         else
           redirect to('/expenses')
         end
