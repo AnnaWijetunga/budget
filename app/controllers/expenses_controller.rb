@@ -19,7 +19,7 @@ class ExpensesController < ApplicationController
   
     post '/expenses' do
       if logged_in?
-        @expense = current_user.expenses.build(params)
+        @expense = current_user.expenses.build(params).save
         if params[:vendor].empty? ||params[:date].empty? || params[:total].empty? || params[:description].empty?
           flash[:message] = "Please fill all boxes, thank you!"
           redirect to "/expenses/new"
@@ -56,15 +56,16 @@ class ExpensesController < ApplicationController
   
     # user must edit without leaving any blank content
     patch '/expenses/:id' do
-      if !params[:vendor].empty? && !params[:date].empty? && !params[:total].empty? && !params[:description].empty?
-        @expense = Expense.find(params[:id])
-        @expense.update(vendor:params[:vendor], date:params[:date], total:params[:total], description:params[:description])
-        @expense.save
-        flash[:message] = "Your expense has been updated!"
-        redirect to "/expenses"
+      @expense = Expense.find(params[:id])
+      @expense.vendor = params[:vendor]
+      @expense.description = params[:description]
+      @expense.date = params[:date]
+      @expense.total = params[:total]
+      if !@expense.save
+        @errors = @expense.errors.full_messages
+        erb :'/expenses/update_expense'
       else
-        flash[:message] = "Please fill all boxes, thank you!"
-        redirect to "/expenses/#{params[:id]}/edit"
+        redirect to("/expenses/#{@expense.id}")
       end
     end
   
