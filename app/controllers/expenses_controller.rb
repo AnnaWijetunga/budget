@@ -11,7 +11,6 @@ class ExpensesController < ApplicationController
   
     get '/expenses/new' do
       if logged_in?
-        # @current_user
         erb :'expenses/create_expense'
       else
         redirect to('/login')
