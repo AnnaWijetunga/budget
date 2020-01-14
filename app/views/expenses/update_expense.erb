@@ -1,9 +1,7 @@
 <h1>Edit Expense</h1>
-
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
+<br>
+<% if flash.has?(:message) %>
+  <p style="color:#eb1607;"><%= flash[:message] %> </p>
 <% end %>
 
 <br></br>
