@@ -71,7 +71,7 @@
   }
 
   .main {
-    overflow: hidden;
+    overflow: scroll;
   }
 
   .content {
@@ -129,7 +129,7 @@
     display: inline-block;
     vertical-align: top;
     width: 50px;
-    height: 30px;
+    height:50px;
     margin-right: 20px;
     margin-left: 10px;
     margin-top: 10px;    
