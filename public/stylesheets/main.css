@@ -118,18 +118,35 @@
     width: 100%;
     height: 1.75rem;            /* Footer height */
   }
-  
-  nav {
-    clear: both;
-    color: #333;
+
+  .navigation-bar {
+    width: 100%; 
+    height: 80px;
     background-color: rgb(167, 163, 163);
-    height: 60px;
+  }
+
+  .logo {
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    height: 30px;
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-top: 10px;    
+  }
+
+  .navigation-bar > a {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 70px;
+    height: 80px;        /* if you want it to take the full height of the bar */
+    line-height: 80px;    /* if you want it vertically middle of the navbar */
   }
   
   nav ul {
     list-style-type: none;
     margin: 0px;
-    padding: 25px 0px 5px 90px;
+    padding: 0px 0px 5px 90px;
   }
   
   nav li {
@@ -137,10 +154,11 @@
     margin-right: 80px;
   }
   
+  /*
   nav li #logout {
     display: inline;
     margin-left: 70px;
-  }
+  }*/
   
   nav li a {
     text-align: center;
@@ -175,36 +193,10 @@
     cursor: pointer;
     font-size: 15px;
   }
-
-  input[type=button], input[type=submit], input[type=reset] {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: iline-block;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size: 15px;
-  }
   
-  /* A link that has not been visited 
-  a:link {
-    color: rgb(72, 72, 73);
-  }
-  /* A link that has been visited 
-  a:visited {
-    color: rgb(70, 62, 194);
-  }
-  /* A link that is hovered on */
   a:hover {
     color: rgba(29, 238, 123, 0.952);
   }
-  /* A link that is selected
-  a:active {
-    color: green;
-  } */
 
   table {
     border-collapse: collapse;
