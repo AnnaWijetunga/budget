@@ -2,8 +2,10 @@
 <br>
 <br>
 
-<% if flash.has?(:message) %>
-  <p style="color:#eb1607;"><%= flash[:message] %> </p>
+<% if @errors %>
+  <% @errors.each do |error| %>
+    <p style="color: red;"><%= error %></p>
+  <% end %>
 <% end %>
 
 <h5><form action="/expenses" method="POST">
