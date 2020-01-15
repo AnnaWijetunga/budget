@@ -11,7 +11,7 @@ class ExpensesController < ApplicationController
   
     get '/expenses/new' do
       if logged_in?
-        erb :'expenses/create_expense'
+        erb :'expenses/new'
       else
         redirect to '/login'
       end
@@ -35,7 +35,7 @@ class ExpensesController < ApplicationController
     get '/expenses/:id' do
       @expense = Expense.find(params[:id])
       if logged_in? && @expense.user == current_user
-        erb :'expenses/show_expense'
+        erb :'expenses/show'
       else
         redirect to('/login')
       end
@@ -48,7 +48,7 @@ class ExpensesController < ApplicationController
       if logged_in? && @expense.user == current_user
         @expense = Expense.find(params[:id])
         @user = User.find(session[:user_id])
-        erb :'expenses/update_expense'
+        erb :'expenses/edit'
       else
         redirect to('/login')
       end
@@ -62,7 +62,7 @@ class ExpensesController < ApplicationController
       @expense.total = params[:total]
       if !@expense.save
         @errors = @expense.errors.full_messages
-        erb :'/expenses/update_expense'
+        erb :'/expenses/edit'
       else
         redirect to("/expenses/#{@expense.id}")
       end

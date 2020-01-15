@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     get '/signup' do
       if !session[:user_id]
-        erb :'users/create_user'
+        erb :'users/new'
       else
         redirect to('/expenses')
       end
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       @user = User.new(params)
       if !@user.save
         @errors = @user.errors.full_messages
-        erb :'users/create_user'
+        erb :'users/new'
       else
         session[:user_id] = @user.id
         redirect to('/expenses')
