@@ -20,7 +20,7 @@ class ExpensesController < ApplicationController
     post '/expenses' do
       if logged_in?
         @expense = current_user.expenses.build(params).save
-        if params[:vendor].empty? ||params[:description].empty? || params[:date].empty? || params[:total].empty?
+        if params[:vendor].empty? || params[:description].empty? || params[:date].empty? || params[:total].empty?
           flash[:message] = "Please fill all boxes, thank you!"
           redirect to "/expenses/new"
         else
@@ -67,6 +67,17 @@ class ExpensesController < ApplicationController
         redirect to("/expenses/#{@expense.id}")
       end
     end
+
+    # post '/expenses/:id/scramble' do
+    #   if logged_in?
+    #     @expense = Expense.find_by_id(params[:id])
+    #     @expense.year = "9102"
+    #     @expense.save
+    #     erb :'expenses/find_year'
+    #   else
+    #     redirect '/login'
+    #   end
+    # end
   
     delete '/expenses/:id/delete' do
       @expense = Expense.find(params[:id])
