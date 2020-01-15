@@ -5,7 +5,7 @@ class ExpensesController < ApplicationController
         @expenses = current_user.expenses
         erb :'expenses/index'
       else
-        redirect to('/login')
+        redirect to '/login'
       end
     end
   
@@ -13,14 +13,14 @@ class ExpensesController < ApplicationController
       if logged_in?
         erb :'expenses/create_expense'
       else
-        redirect to('/login')
+        redirect to '/login'
       end
     end
   
     post '/expenses' do
       if logged_in?
         @expense = current_user.expenses.build(params).save
-        if params[:vendor].empty? ||params[:date].empty? || params[:total].empty? || params[:description].empty?
+        if params[:vendor].empty? ||params[:description].empty? || params[:date].empty? || params[:total].empty?
           flash[:message] = "Please fill all boxes, thank you!"
           redirect to "/expenses/new"
         else
@@ -54,7 +54,6 @@ class ExpensesController < ApplicationController
       end
     end
   
-    # user must edit without leaving any blank content
     patch '/expenses/:id' do
       @expense = Expense.find(params[:id])
       @expense.vendor = params[:vendor]
@@ -77,6 +76,5 @@ class ExpensesController < ApplicationController
       else
         redirect to('/login')
       end
-    end
-  
+    end 
 end
