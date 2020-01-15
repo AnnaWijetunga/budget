@@ -1,10 +1,10 @@
-<% if @errors %>
-  <p style="color: red;"><%= @errors %></p>
-<% end %>
-
 <h1>My Expenses</h1>
 <br>
 <br>
+
+<% if @errors %>
+  <p style=“color: red;”><%= @errors %></p>
+<% end %>
 
 <h3>Hi, <%= current_user.username.capitalize %>!</h3>
 <br>
@@ -13,16 +13,19 @@
   <% if @expenses.size > 0 %>
     <table class="table table-hover table-striped" >
     <tr class="info">
-      <th><h4>Description</h4></th>
-      <th><h4>Amount</h4></th>
       <th><h4>Date</h4></th>
+      <th><h4>Vendor</h4></th>
+      <th><h4>Total</h4></th>
+      <th><h4>Description</h4></th>
+      <th><h4>Edit</h4></th>
       <th><h4></h4></th>
     </tr>
       <% current_user.expenses_sort_by_date.each do |expense| %>
         <tr style="text-align:left;">
-          <td><a href="expenses/<%= expense.id %>"><%= expense.description %></a></td>
-          <td>$ <%= expense.total %></td>
           <td><%= expense.date.strftime('%D') %></td>
+          <td><%= expense.vendor %></td>
+          <td>$ <%= expense.total %></td>
+          <td><a href="expenses/<%= expense.id %>"><%= expense.description %></a></td>
           <td><a href="expenses/<%= expense.id %>/edit">Edit</a></td>
         </tr>
       <% end %>
