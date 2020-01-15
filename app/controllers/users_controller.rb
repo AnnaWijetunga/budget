@@ -48,5 +48,4 @@ class UsersController < ApplicationController
         rediect to('/')
       end
     end
-  
 end
