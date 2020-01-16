@@ -1,14 +1,14 @@
 <h1>Edit Expense</h1>
 <br>
 <% if flash.has?(:message) %>
-  <p style="color:#eb1607;"><%= flash[:message] %> </p>
+  <p style="color:#f73325;"><%= flash[:message] %> </p>
 <% end %>
 
 <br></br>
 
 <h5><form action="/expenses/<%= @expense.id %>" method="POST">
   <input type="hidden" id="hidden" name="_method" value="patch"/>
-
+  
   <label for="vendor">Vendor: </label>
   <input type="text" name="expense[vendor]" id="vendor" value="<%= @expense.vendor %>"/>
   
