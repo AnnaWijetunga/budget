@@ -4,18 +4,18 @@ class UsersController < ApplicationController
       if !session[:user_id]
         erb :'users/new'
       else
-        redirect to('/expenses')
+        redirect to '/expenses'
       end
     end
-  
+
     post '/signup' do
-      @user = User.new(params)
-      if !@user.save
-        @errors = @user.errors.full_messages
-        erb :'users/new'
+      if !params[:user].select{|k, v| v == ""}.empty?
+        flash[:message] = "Please fill in all content"
+        redirect to '/signup'
       else
+        @user = User.create(params[:user])
         session[:user_id] = @user.id
-        redirect to('/expenses')
+        redirect to '/expenses'
       end
     end
   
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       if !session[:user_id]
         erb :'users/login'
       else
-        redirect to('/expenses')
+        redirect to '/expenses'
       end
     end
   
@@ -31,9 +31,9 @@ class UsersController < ApplicationController
       @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
-        redirect to('/expenses')
+        redirect to '/expenses'
       else
-        @errors = "Invalid username or password."
+        flash[:message] = "Invalid username or password."
         erb :'users/login'
       end
     end
@@ -43,9 +43,9 @@ class UsersController < ApplicationController
         @user = current_user
         @user = nil
         session.destroy
-        redirect to('/')
+        redirect to '/'
       else
-        rediect to('/')
+        rediect to '/'
       end
     end
 end
