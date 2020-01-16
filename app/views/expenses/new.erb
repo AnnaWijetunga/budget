@@ -3,10 +3,12 @@
 <br>
 
 <% if flash.has?(:message) %>
-  <p style="color:#f23a3a;"><%= flash[:message] %> </p>
+  <p style="color:#f73325;"><%= flash[:message] %> </p>
 <% end %>
 
 <h5><form action="/expenses" method="POST">
+  <input type = "hidden" name="expense[user_id]" value=<%= current_user.id %> />
+  
   <label for="vendor">Vendor: </label>
   <input type="text" name="expense[vendor]" id="vendor"/>
 
