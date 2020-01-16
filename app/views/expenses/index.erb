@@ -2,10 +2,6 @@
 <br>
 <br>
 
-<% if @errors %>
-  <p style=“color: red;”><%= @errors %></p>
-<% end %>
-
 <h3>Hi, <%= current_user.username.capitalize %>!</h3>
 <br>
 
@@ -34,7 +30,7 @@
     <a href="/expenses/new">Create new expense</a>
     <br>
     <br>
-  <% else %>
-    Yes, so exciting! Click <a href="/expenses/new">here</a> to add your first expense.
-  <% end %>
+  <% else %
+    Yes, so exciting! Click <a href="/expenses/new">here</a> to add an expense.
+  <% end %> 
 </ul></h4>
