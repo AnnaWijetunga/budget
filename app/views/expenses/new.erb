@@ -2,30 +2,28 @@
 <br>
 <br>
 
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
+<% if flash.has?(:message) %>
+  <p style="color:#f23a3a;"><%= flash[:message] %> </p>
 <% end %>
 
 <h5><form action="/expenses" method="POST">
   <label for="vendor">Vendor: </label>
-  <input type="text" name="vendor" id="vendor"/>
+  <input type="text" name="expense[vendor]" id="vendor"/>
 
   <br>
 
   <label for="date">Date: </label>
-  <input type="date" name="date" id="date"/>
+  <input type="date" name="expense[date]" id="date"/>
 
   <br>
 
   <label for="total">Total:  $</label>
-  <input type="number" name="total" id="total" min="0.01" step="0.01" max="9999.99"/>
+  <input type="number" name="expense[total]" id="total" min="0.01" step="0.01" max="9999999.99"/>
 
   <br>
 
   <label for="description">Description: </label>
-  <input type="text" name="description" id="description"/>
+  <input type="text" name="expense[description]" id="description"/>
 
   <br>
 
