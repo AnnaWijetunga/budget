@@ -2,26 +2,24 @@
 <br>
 <br>
 
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
+<% if flash.has?(:message) %>
+  <p style="color:#f73325;"><%= flash[:message] %> </p>
 <% end %>
 
 <h4><form action="/signup" method="POST">
 
   <label for="username">Username:</label>
-  <input type="text" name="username" id="username"/>
+  <input type="text" name="user[username]" id="username"/>
 
   <br></br>
 
   <label for="email">Email:</label>
-  <input type="email" name="email" id="email"/>
+  <input type="email" name="user[email]" id="email"/>
 
   <br></br>
 
   <label for="password">Password:</label>
-  <input type="password" name="password" id="password"/>
+  <input type="password" name="user[password]" id="password"/>
 
   <br></br>
 
