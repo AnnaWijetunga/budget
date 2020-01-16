@@ -10,13 +10,17 @@
 <p><b>Total:</b> $<%= "%.2f" % @expense.total %></p>
 <p><b>Description:</b> <%= @expense.description %></p>
 
-<br>
-
-<p><a href="/expenses/<%= @expense.id %>/edit">Edit Expense</a></p>
-
 <h5><form action="/expenses/<%= @expense.id %>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="DELETE"/>
   <input type="submit" value="Delete Expense">
 </form></h5>
 <br>
+
+<p><a href="/expenses/<%= @expense.id %>/edit">Edit Expense</a></p>
+
+<!-- <h5><form action="/expenses/<%= @expense.id %>/scramble" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="post"/>
+  <input type="submit" value="Scramble Year">
+</form></h5> -->
+
 <p><a href="/expenses">View All Expenses</a></p>
