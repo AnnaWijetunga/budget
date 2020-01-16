@@ -1,5 +1,7 @@
 class ExpensesController < ApplicationController
 
+    # user can view all expenses if logged in
+    # if not logged in, redirect to login
     get '/expenses' do
       if logged_in?
         @expenses = current_user.expenses
@@ -9,6 +11,7 @@ class ExpensesController < ApplicationController
       end
     end
   
+    # user creates an expense if logged in
     get '/expenses/new' do
       if logged_in?
         erb :'expenses/new'
@@ -17,54 +20,64 @@ class ExpensesController < ApplicationController
       end
     end
   
+    # user must fill in all fields to create an expense
     post '/expenses' do
-      if logged_in?
-        @expense = current_user.expenses.build(params).save
-        if params[:vendor].empty? || params[:description].empty? || params[:date].empty? || params[:total].empty?
-          flash[:message] = "Please fill all boxes, thank you!"
-          redirect to "/expenses/new"
-        else
-          redirect to('/expenses')
-        end
+      if !params[:expense].select{|k, v| v == ""}.empty?
+        flash[:message] = "Please don't leave blank content"
+        redirect to "/expenses/new"
       else
-        redirect to('/login')
+        @user = current_user
+        @expense = Expense.create(params[:expense])
+        redirect to "/expenses/#{@expense.id}" # LOOK
       end
     end
   
     # shows one expense
     get '/expenses/:id' do
-      @expense = Expense.find(params[:id])
-      if logged_in? && @expense.user == current_user
+      if logged_in?
+        @expense = Expense.find(params[:id])
         erb :'expenses/show'
       else
-        redirect to('/login')
+        redirect to '/login'
       end
     end
   
     # if logged in, user sees edit form
     # user can only edit expenses they created
     get '/expenses/:id/edit' do
-      @expense = Expense.find(params[:id])
-      if logged_in? && @expense.user == current_user
+      if logged_in?
         @expense = Expense.find(params[:id])
-        @user = User.find(session[:user_id])
-        erb :'expenses/edit'
+        if @expense.user == current_user
+          erb :'expenses/edit'
+        else
+          redirect to '/expenses'
+        end
       else
-        redirect to('/login')
+        redirect to '/login'
       end
     end
+    
+    # get '/expenses/:id/edit' do
+    #   @expense = Expense.find(params[:id])
+    #   if logged_in? && @expense.user == current_user
+    #     @expense = Expense.find(params[:id])
+    #     @user = User.find(session[:user_id])
+    #     erb :'expenses/edit'
+    #   else
+    #     redirect to '/login'
+    #   end
+    # end
   
+    # does not let a user edit a text with blank content
     patch '/expenses/:id' do
-      @expense = Expense.find(params[:id])
-      @expense.vendor = params[:vendor]
-      @expense.description = params[:description]
-      @expense.date = params[:date]
-      @expense.total = params[:total]
-      if !@expense.save
-        @errors = @expense.errors.full_messages
-        erb :'/expenses/edit'
+      if params[:expense].select{|k, v| v == ""}.empty?
+        @expense = Expense.find(params[:id])
+        @expense.update(params[:expense])
+        @expense.save
+        redirect to "/expenses/#{@expense.id}"
       else
-        redirect to("/expenses/#{@expense.id}")
+        flash[:message] = "Please fill all content"
+        redirect to '/expenses/#{params[:id]}/edit' # LOOK
       end
     end
 
@@ -83,9 +96,10 @@ class ExpensesController < ApplicationController
       @expense = Expense.find(params[:id])
       if logged_in? && @expense.user == current_user
         @expense.destroy
-        redirect to('/expenses')
+        #flash[:message] = "Your expense has been deleted."
+        redirect to '/expenses'
       else
-        redirect to('/login')
+        redirect to '/login'
       end
     end 
 end
