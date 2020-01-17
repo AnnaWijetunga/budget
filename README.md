@@ -10,8 +10,7 @@ Penny Patrol is a simplified expense tracker that allows users to add in and kee
 
 Fork and clone repo
 
-```$ git clone https://github.com/AnnaWijetunga/budget
-```
+    $ git clone https://github.com/AnnaWijetunga/budget
 
 Switch to directory
 
