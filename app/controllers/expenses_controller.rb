@@ -81,16 +81,12 @@ class ExpensesController < ApplicationController
       end
     end
 
-    # post '/expenses/:id/scramble' do
-    #   if logged_in?
-    #     @expense = Expense.find_by_id(params[:id])
-    #     @expense.year = "9102"
-    #     @expense.save
-    #     erb :'expenses/find_year'
-    #   else
-    #     redirect '/login'
-    #   end
-    # end
+   #shows only expenses with the given description
+   get '/expenses/total/:total' do
+    #  @vendor = params[:vendor]
+    #  @filtered_expenses = current_user.expenses_by_vendor(@vendor)
+     erb :"/expenses/total"
+   end
   
     delete '/expenses/:id/delete' do
       @expense = Expense.find(params[:id])
