@@ -26,7 +26,7 @@ Enter in browser to view
 
 ## Usage
 
-Create an account to get started!
+Create an account with your username, email and password to get started!
 
 ## Contributing
 
