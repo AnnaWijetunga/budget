@@ -13,14 +13,17 @@ class UsersController < ApplicationController
         flash[:message] = "Please fill in all content"
         redirect to '/signup'
       else
-        @user = User.create(params[:user])
+        @user = User.new(params[:user]) # removed .create
+        @user.save # added the save method, b/c I'm using .new
         session[:user_id] = @user.id
         redirect to '/expenses'
       end
     end
   
     get '/login' do
-      if !session[:user_id]
+      # if !session[:user_id]
+      #   erb :'users/login'
+      if !logged_in?
         erb :'users/login'
       else
         redirect to '/expenses'
@@ -29,6 +32,7 @@ class UsersController < ApplicationController
   
     post '/login' do
       @user = User.find_by(username: params[:username])
+      # binding.pry
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect to '/expenses'
@@ -40,8 +44,8 @@ class UsersController < ApplicationController
   
     get '/logout' do
       if logged_in?
-        @user = current_user
-        @user = nil
+        # @user = current_user
+        # @user = nil
         session.destroy
         redirect to '/'
       else
