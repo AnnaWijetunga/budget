@@ -70,11 +70,12 @@ class ExpensesController < ApplicationController
       end
     end
 
-   #shows only expenses with the given description
+   # shows only the total of expenses
    get '/expenses/total/:total' do
      erb :"/expenses/total"
    end
-  
+
+    # if logged in, user can delete expense they created
     delete '/expenses/:id/delete' do
       @expense = Expense.find(params[:id])
       if logged_in? && @expense.user == current_user
