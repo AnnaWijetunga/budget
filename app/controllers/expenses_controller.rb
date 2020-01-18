@@ -56,17 +56,6 @@ class ExpensesController < ApplicationController
         redirect to '/login'
       end
     end
-    
-    # get '/expenses/:id/edit' do
-    #   @expense = Expense.find(params[:id])
-    #   if logged_in? && @expense.user == current_user
-    #     @expense = Expense.find(params[:id])
-    #     @user = User.find(session[:user_id])
-    #     erb :'expenses/edit'
-    #   else
-    #     redirect to '/login'
-    #   end
-    # end
   
     # does not let a user edit a text with blank content
     patch '/expenses/:id' do
@@ -83,8 +72,6 @@ class ExpensesController < ApplicationController
 
    #shows only expenses with the given description
    get '/expenses/total/:total' do
-    #  @vendor = params[:vendor]
-    #  @filtered_expenses = current_user.expenses_by_vendor(@vendor)
      erb :"/expenses/total"
    end
   
@@ -92,7 +79,6 @@ class ExpensesController < ApplicationController
       @expense = Expense.find(params[:id])
       if logged_in? && @expense.user == current_user
         @expense.destroy
-        #flash[:message] = "Your expense has been deleted."
         redirect to '/expenses'
       else
         redirect to '/login'
