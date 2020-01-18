@@ -1,6 +1,12 @@
 require './config/environment'
 require 'rack-flash'
 
+# A Sinatra Controller is a Ruby Class 
+# that inherits from Sinatra::Base 
+# This inheritance transforms our Ruby class 
+# into a web app by giving it a Rack-compatible interface 
+# through inheriting from the "base" of the Sinatra framework
+
 class ApplicationController < Sinatra::Base
 
   use Rack::Flash

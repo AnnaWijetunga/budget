@@ -10,3 +10,6 @@ ActiveRecord::Base.establish_connection(
 
 require './app/controllers/application_controller'
 require_all 'app'
+
+# We use this file to connect all the files 
+# in our application to the appropriate gems and to each other
