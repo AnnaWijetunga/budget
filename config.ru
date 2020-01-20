@@ -4,7 +4,7 @@ if ActiveRecord::Migrator.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 end
 
-use Rack::MethodOverride
+use Rack::MethodOverride # Sinatra Middleware that lets our app send patch/put/delete requests
 use ExpensesController
 use UsersController
 run ApplicationController
