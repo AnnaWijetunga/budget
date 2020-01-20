@@ -13,9 +13,8 @@ class UsersController < ApplicationController
         flash[:message] = "Please fill in all content"
         redirect to '/signup'
       else
-        @user = User.new(params[:user]) # removed .create
-        @user.save # added the save method, b/c I'm using .new
-        session[:user_id] = @user.id # log in
+        @user = User.create(params[:user])
+        session[:user_id] = @user.id # logs user in
         redirect to '/expenses'
       end
     end
