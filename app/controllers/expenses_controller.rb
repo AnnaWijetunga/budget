@@ -1,25 +1,38 @@
 class ExpensesController < ApplicationController
 
+    # instead of "if logged in", authenticate here
+    set(:auth) do |auth_required|
+      condition do
+        if auth_required && !logged_in? 
+          redirect "/login", 302
+        end
+      end
+    end
+  
     # user can view all expenses if logged in
     # if not logged in, redirect to login
-    get '/expenses' do
-      if logged_in?
-        @expenses = current_user.expenses
-        erb :'expenses/index'
-      else
-        redirect to '/login'
-      end
+    get '/expenses', auth: true do 
+      @expenses = current_user.expenses
+      erb :'expenses/index'
     end
   
     # user creates an expense if logged in
     get '/expenses/new' do
-      if logged_in?
-        erb :'expenses/new'
-      else
-        redirect to '/login'
-      end
+      erb :'expenses/new'
     end
-  
+    
+    # shows only the total of expenses
+    # /expenses/total/2019-01-01
+    get '/expenses/total' do
+      if params[:after_date].present?
+        @after_date = params[:after_date]
+        @total = current_user.expenses.where("date >= ?", params[:after_date]).sum(:total)
+      else
+        @total = current_user.total_amount
+      end
+      erb :"/expenses/total"
+    end
+
     # user must fill in all fields to create an expense
     post '/expenses' do
       if !params[:expense].select{|k, v| v == ""}.empty?
@@ -34,26 +47,18 @@ class ExpensesController < ApplicationController
   
     # shows one expense
     get '/expenses/:id' do
-      if logged_in?
-        @expense = Expense.find(params[:id])
-        erb :'expenses/show'
-      else
-        redirect to '/login'
-      end
+      @expense = Expense.find(params[:id])
+      erb :'expenses/show'
     end
   
     # if logged in, user sees edit form
     # user can only edit expenses they created
     get '/expenses/:id/edit' do
-      if logged_in?
-        @expense = Expense.find(params[:id])
-        if @expense.user == current_user
-          erb :'expenses/edit'
-        else
-          redirect to '/expenses'
-        end
+      @expense = Expense.find(params[:id])
+      if @expense.user == current_user
+        erb :'expenses/edit'
       else
-        redirect to '/login'
+        redirect to '/expenses'
       end
     end
   
@@ -70,19 +75,11 @@ class ExpensesController < ApplicationController
       end
     end
 
-   # shows only the total of expenses
-   get '/expenses/total/:total' do
-     erb :"/expenses/total"
-   end
-
     # if logged in, user can delete expense they created
     delete '/expenses/:id/delete' do
       @expense = Expense.find(params[:id])
-      if logged_in? && @expense.user == current_user
-        @expense.destroy
-        redirect to '/expenses'
-      else
-        redirect to '/login'
-      end
+      @expense.user == current_user
+      @expense.destroy
+      redirect to '/expenses'
     end 
 end

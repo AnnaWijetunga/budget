@@ -14,8 +14,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions
-    set :session_secret, "so_secure"
+    enable :sessions # turns sessions on 
+    set :session_secret, "so_secure" # encryption key used to create a session_id
   end
 
   get "/" do
