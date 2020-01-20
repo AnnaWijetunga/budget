@@ -22,9 +22,8 @@ class ExpensesController < ApplicationController
       erb :'expenses/new'
     end
     
-    # shows only the total of expenses
-    # /expenses/total/2019-01-01
-    get '/expenses/total', auth: true do
+    # shows only the total of expenses after a set date
+    get '/expenses/total' do
       if params[:after_date].present?
         @after_date = params[:after_date]
         @total = current_user.expenses.where("date >= ?", params[:after_date]).sum(:total)
@@ -35,14 +34,14 @@ class ExpensesController < ApplicationController
     end
 
     # user must fill in all fields to create an expense
-    post '/expenses', auth: true do
+    post '/expenses' do
       if !params[:expense].select{|k, v| v == ""}.empty?
         flash[:message] = "Please don't leave blank content"
         redirect to "/expenses/new"
       else
         @user = current_user
         @expense = Expense.create(params[:expense])
-        redirect to "/expenses/#{@expense.id}" # LOOK
+        redirect to "/expenses/#{@expense.id}"
       end
     end
   
@@ -64,7 +63,7 @@ class ExpensesController < ApplicationController
     end
   
     # does not let a user edit a text with blank content
-    patch '/expenses/:id', auth: true do
+    patch '/expenses/:id' do
       if params[:expense].select{|k, v| v == ""}.empty?
         @expense = Expense.find(params[:id])
         @expense.update(params[:expense])
