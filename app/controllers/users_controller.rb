@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       else
         @user = User.new(params[:user]) # removed .create
         @user.save # added the save method, b/c I'm using .new
-        session[:user_id] = @user.id
+        session[:user_id] = @user.id # log in
         redirect to '/expenses'
       end
     end
