@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
-  has_secure_password
+  has_secure_password # ActiveRecord macro, works with bcrypt, gives us methods to authenticate a user/password 
   has_many :expenses
 
   def total_amount
-    self.expenses.collect {|expense| expense.total}.sum
+    expenses.collect {|expense| expense.total}.sum
   end
 
   def expenses_sort_by_date
-    self.expenses.sort_by {|expense| expense[:date]}.reverse
+    expenses.sort_by {|expense| expense[:date]}.reverse
   end
 
 end
