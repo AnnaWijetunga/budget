@@ -34,6 +34,14 @@ class ApplicationController < Sinatra::Base
       !!session[:user_id] # will return true unless the value of session[:user_id] is false or nil.
     end
 
+    def authorize_user(expense)
+      if expense.user == current_user
+        erb :'expenses/edit'
+      else
+        redirect to '/expenses'
+      end
+    end
+    
   end
 
 end

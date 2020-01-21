@@ -55,11 +55,7 @@ class ExpensesController < ApplicationController
     # user can only edit expenses they created
     get '/expenses/:id/edit', auth: true do
       @expense = Expense.find(params[:id])
-      if @expense.user == current_user
-        erb :'expenses/edit'
-      else
-        redirect to '/expenses'
-      end
+      authorize_user(@expense)
     end
   
     # does not let a user edit a text with blank content
