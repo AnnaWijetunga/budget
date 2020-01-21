@@ -71,7 +71,7 @@ class ExpensesController < ApplicationController
         redirect to "/expenses/#{@expense.id}"
       else
         flash[:message] = "Please fill all content"
-        redirect to "/expenses/#{params[:id]}/edit" # LOOK
+        redirect to "/expenses/#{params[:id]}/edit"
       end
     end
 
