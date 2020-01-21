@@ -37,3 +37,15 @@ class ApplicationController < Sinatra::Base
   end
 
 end
+
+# Rendering a file displays that view without submitting 
+# an additional request to the server. It also allows us 
+# to pass instance variables through to the erb file that 
+# can be used to change the specifics of what the page will display.
+
+# A redirect differs from a render in that it sends a new 
+# call request to the server. 
+# We can not pass instance variables through a redirect, 
+# as those variables no longer exist once a new request has 
+# been made, due to the statelessness of the server.
+# login route is an example

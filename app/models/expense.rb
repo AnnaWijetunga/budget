@@ -10,5 +10,5 @@ end
 # Foreign key tells tables how to relate to each other
 
 # A belongs_to association sets up a one-to-one connection 
-# with another model, such that each instance of the declaring model 
+# with another model (here, user), such that each instance of this model 
 # "belongs to" one instance of the other model.
