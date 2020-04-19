@@ -6,6 +6,10 @@ This is a fully functional CRUD application built with Sinatra's framework.
 
 Penny Patrol is a simplified expense tracker that allows users to add in and keep track of their expenses. A user to add, edit or delete expenses.
 
+## Penny Patrol Video Walkthrough
+
+Click here for a 1-minute video walkthrough: https://vimeo.com/386285568
+
 ## Installation
 
 Fork and clone repo
