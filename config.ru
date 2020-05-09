@@ -1,8 +1,10 @@
 require './config/environment'
 
-if ActiveRecord::Migrator.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
-end
+# no longer needed - switching from sqlite to postgres
+
+# if ActiveRecord::Migrator.needs_migration?
+#   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
+# end
 
 use Rack::MethodOverride # Sinatra Middleware that lets our app send patch/put/delete requests
 use ExpensesController
