@@ -1,6 +1,10 @@
 # Penny Patrol
 
-This is a fully functional CRUD application built with Sinatra's framework.
+Welcome to Penny Patrol! This app is a fully functional CRUD application built with Sinatra's framework.
+
+To see Penny Patrol live, you're always welcome to click below:
+
+https://penny-patrol.herokuapp.com/
 
 ## Overview
 
